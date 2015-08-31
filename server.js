@@ -12,6 +12,7 @@ var express = require('express')
   , nconf = require('nconf')
   , Recaptcha = require('recaptcha').Recaptcha;
 
+var app = express();
 
 /**
 * CONFIGURATION
@@ -177,7 +178,6 @@ function addUser (source, sourceUser) {
 
 
 
-var app = module.exports = express.createServer();
 
 /**
 * CONFIGURATION
@@ -185,19 +185,40 @@ var app = module.exports = express.createServer();
 * set up view engine (jade), css preprocessor (less), and any custom middleware (errorHandler)
 **/
 
-app.configure(function() {
+
+
+    var methodOverride = require('method-override');
+    var session = require('express-session');
+    var bodyParser = require('body-parser');
+    var cookieParser= require('cookie-parser');
+    
+
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
     app.use(require('./middleware/locals'));
-    app.use(express.cookieParser());
-    app.use(express.session({ secret: 'azure zomg' }));
+    app.use(cookieParser());
+    
+    app.use(methodOverride());
+    app.use(session({ resave: true, saveUninitialized: true, secret: 'uwotm8' }));
+    // parse application/json
+    app.use(bodyParser.json());            
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+
     app.use(everyauth.middleware());
-    app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] }));
-    app.use(connect.static(__dirname + '/public'));
+    app.use(require('less-middleware')({ src: __dirname + '/public' }));
+    
+    var connect = require('connect'),
+    serveStatic = require('serve-static');
+    
+    var app = connect();
+    
+    app.use(serveStatic(__dirname + '/public'));
     app.use(app.router);
-});
+    
+    
+
 
 /**
 * ERROR MANAGEMENT
@@ -206,11 +227,9 @@ app.configure(function() {
 * to show a custom 404 / 500 error using jade and the middleware errorHandler (see ./middleware/errorHandler.js)
 **/
 var errorOptions = { dumpExceptions: true, showStack: true }
-app.configure('development', function() { });
-app.configure('production', function() {
-    errorOptions = {};
-});
+
 app.use(require('./middleware/errorHandler')(errorOptions));
+
 
 
 
@@ -274,5 +293,5 @@ io.sockets.on('connection', function(socket) {
 
 everyauth.helpExpress(app);
 app.listen(process.env.PORT || 3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening on port %d in %s mode ", app.address().port, app.settings.env);
 
