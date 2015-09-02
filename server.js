@@ -212,7 +212,7 @@ function addUser (source, sourceUser) {
     serveStatic = require('serve-static');
     
     connect.use(serveStatic("../angularjs"));
-    app.use(connect);
+   // app.use(connect);
     
    //app.use(app.router);
     
