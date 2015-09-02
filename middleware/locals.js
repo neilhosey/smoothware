@@ -7,8 +7,8 @@ var path = require('path');
 module.exports = function(req, res, next) {
     var app = req.app;
 
-    // set base var
-    res.local('base', '/' == app.route ? '' : app.route);
+    // // set base var
+     res.locals.base = '/' == app.route ? '' : app.route;
 
     // override the render method to automatically detect mobile devices
     var r1 = res.render;
