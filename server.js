@@ -195,7 +195,7 @@ function addUser (source, sourceUser) {
 
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    app.use(require('./middleware/locals'));
+    //app.use(require('./middleware/locals'));
     app.use(cookieParser());
     
     app.use(methodOverride());
@@ -209,13 +209,13 @@ function addUser (source, sourceUser) {
     app.use(everyauth.middleware());
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     
-    var connect = require('connect'),
+    var connect = require('connect')(),
     serveStatic = require('serve-static');
     
-    var app = connect();
+    connect.use(serveStatic("../angularjs"));
+    app.use(connect);
     
-    app.use(serveStatic(__dirname + '/public'));
-    app.use(app.router);
+   //app.use(app.router);
     
     
 
@@ -252,16 +252,17 @@ require('./routes/global')(app);
 * -------------------------------------------------------------------------------------------------
 * this shows a basic example of using socket.io to orchestrate chat
 **/
+var http = require('http').Server(app);
 
 // socket.io configuration
 var buffer = [];
-var io = require('socket.io').listen(app);
+var io = require('socket.io').listen(http);
 
 
-io.configure(function() {
-    io.set("transports", ["xhr-polling"]);
-    io.set("polling duration", 100);
-});
+// io.configure(function() {
+//     io.set("transports", ["xhr-polling"]);
+//     io.set("polling duration", 100);
+// });
 
 io.sockets.on('connection', function(socket) {
     socket.emit('messages', { buffer: buffer });
@@ -291,7 +292,6 @@ io.sockets.on('connection', function(socket) {
 * this starts up the server on the given port
 **/
 
-everyauth.helpExpress(app);
 app.listen(process.env.PORT || 3000);
-console.log("Express server listening on port %d in %s mode ", app.address().port, app.settings.env);
+//console.log("Express server listening on port %d in %s mode ", app.address().port, app.settings.env);
 
