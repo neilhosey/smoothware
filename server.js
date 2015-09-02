@@ -205,7 +205,7 @@ function addUser (source, sourceUser) {
     app.use(bodyParser.urlencoded({ extended: true }));
 
 
-    app.use(everyauth.middleware());
+    //app.use(everyauth.middleware());
     app.use(require('less-middleware')({ src: __dirname + '/public' }));
     
     var connect = require('connect')(),
