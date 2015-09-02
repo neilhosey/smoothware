@@ -5,14 +5,13 @@
 * include any modules you will use through out the file
 **/
 
-var express = require('express')
+var app = require('express')()
   , less = require('less')
   , connect = require('connect')
   , everyauth = require('everyauth')
   , nconf = require('nconf')
   , Recaptcha = require('recaptcha').Recaptcha;
 
-var app = express();
 
 /**
 * CONFIGURATION
@@ -291,7 +290,6 @@ io.sockets.on('connection', function(socket) {
 * -------------------------------------------------------------------------------------------------
 * this starts up the server on the given port
 **/
-
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 1337);
 //console.log("Express server listening on port %d in %s mode ", app.address().port, app.settings.env);
 
