@@ -194,7 +194,7 @@ function addUser (source, sourceUser) {
 
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    //app.use(require('./middleware/locals'));
+    app.use(require('./middleware/locals'));
     app.use(cookieParser());
     
     app.use(methodOverride());
