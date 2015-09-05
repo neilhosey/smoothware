@@ -204,7 +204,7 @@ function addUser (source, sourceUser) {
     // parse application/x-www-form-urlencoded
     app.use(bodyParser.urlencoded({ extended: true }));
 
- //   app.use(everyauth.middleware());
+    app.use(everyauth.middleware(app));
     app.use(lessMiddleware(__dirname + '/public'));
     
     
