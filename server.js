@@ -5,7 +5,8 @@
 * include any modules you will use through out the file
 **/
 
-var app = require('express')()
+var express = require('express')
+  , app = express()
   , less = require('less')
   , connect = require('connect')
   , everyauth = require('everyauth')
@@ -184,17 +185,16 @@ function addUser (source, sourceUser) {
 * set up view engine (jade), css preprocessor (less), and any custom middleware (errorHandler)
 **/
 
-
-
     var methodOverride = require('method-override');
     var session = require('express-session');
     var bodyParser = require('body-parser');
     var cookieParser= require('cookie-parser');
+    var lessMiddleware = require('less-middleware');
     
-
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    app.use(require('./middleware/locals'));
+    app.set('view options', {layout:true})
+        
     app.use(cookieParser());
     
     app.use(methodOverride());
@@ -204,18 +204,12 @@ function addUser (source, sourceUser) {
     // parse application/x-www-form-urlencoded
     app.use(bodyParser.urlencoded({ extended: true }));
 
-
-    //app.use(everyauth.middleware());
-    app.use(require('less-middleware')({ src: __dirname + '/public' }));
+    app.use(everyauth.middleware());
+    app.use(lessMiddleware(__dirname + '/public'));
     
-    var connect = require('connect')(),
-    serveStatic = require('serve-static');
     
-    connect.use(serveStatic("../angularjs"));
-   // app.use(connect);
-    
-   //app.use(app.router);
-    
+    //app.use(require('./middleware/locals'));
+    app.use(express.static(__dirname + '/public'));
     
 
 
@@ -242,7 +236,7 @@ require('./routes/home')(app);
 require('./routes/account')(app);
 
 // Global Routes - this should be last!
-require('./routes/global')(app);
+//require('./routes/global')(app);
 
 
 
