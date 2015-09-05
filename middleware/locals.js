@@ -8,10 +8,12 @@ module.exports = function(req, res, next) {
     var app = req.app;
 
     // // set base var
-     res.locals.base = '/' == app.route ? '' : app.route;
+     res.locals.base = '/' == app.route.path ? '' : app.route.path;
 
+        console.log(app.route.path);
     // override the render method to automatically detect mobile devices
     var r1 = res.render;
+    
     res.render = function(view, model, next) {
         var rd = getRenderData(req, view);
         model.layout = rd.layout;        

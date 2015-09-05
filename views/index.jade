@@ -1,40 +1,35 @@
+extends layout
 
-section(class="featured")
-  div(class="content-wrapper")
-      hgroup(class="title")
-          h1=title 
-          h2 Modify this template to jump-start your Node.JS Express application
-      p To learn more about node.js, visit <a href="http://nodejs.org" title="node.js Website">http://nodejs.org/</a>. The page features <span class="highlight">videos, tutorials, and samples</span> to help you get the most from node.js. If you have any questions about node.js, visit <a href="https://github.com/joyent/node" title="node.js github">github</a>.
+block content
+  section(class="featured")
+    div(class="content-wrapper")
+        hgroup(class="title")
+            h2 Bespoke software development.  Choose the technology stack that best suits the solution.
+            
+  
+  section(class="main-content")
+    h3 Services:
+    ol(class="round")
+        li(class="one")
+            h5 Mobile Apps
+            p
+             |Custom development of Android and iOS Apps that communicate with either .NET or Node.js webservices.  Specializing in Map and Location based apps.
+        li(class="two")
+            h5 eCommerce Applications
+            p For selling online, choose from a custom solution, or a standard Magento site with customizable integration to shipping partners.
+        li(class="three")
+            h5 Bespoke Websites and Applications
+            p Bespoke website development with a choice of the latest tech stacks from .NET, MEAN, Node.js,Angular.js, express.js, jade.js, React.js,Bootstrap.
+            
+              section(class="features")
+        section(class="feature")
+            img(src="/images/aspNetHome.png", alt="")
+            h3 SilentBid
+            p Custom Bidding Application.  Contact for more information.
+            
+        section(class="feature")
+            img(src="/images/npm.png", alt="")
+            h3 Pointr
+            p Phone App that allows you to meet up with friends and view there location on route, or to find friends in a places like festivals, supermarkets, shopping centres.
 
-section(class="main-content")
-  h3 We suggest the following:
-  ol(class="round")
-      li(class="one")
-          h5 Try this out on a mobile device
-          p
-           |This template supports various template options for viewing on mobile devices.
-      li(class="two")
-          h5 Add NPM packages and jump start your coding
-          p NPM makes it easy to install and update free libraries in WebMatrix. To install a package, go to the Files workspace and click the NPM button in the ribbon.
-      li(class="three")
-          h5 Setup deployment to your web server
-          p
-            Use FTP or Microsoft Web Deploy to quickly and easily publish your application to a web server. Just click the Publish button in the ribbon and enter your credentials. For even easier deployment, you can import publish settings that you get from your hosting provider.
-  section(class="features")
-      section(class="feature")
-          img(src="/images/aspNetHome.png", alt="")
-          h3 Built it with express
-          p 
-            |Express is a Sinatra inspired web development framework for node.js -- insanely fast, flexible, and simple.  For more information, visit 
-            a(href="http://expressjs.com/") expressjs.org
-            |.
-          
-      section(class="feature")
-          img(src="/images/npm.png", alt="")
-          h3 NPM Gallery
-          p 
-            |NPM is a WebMatrix extension that makes it easy to install and update libraries. Visit
-            a(href="http://npmjs.org") npmjs.org
-            |for more information.
-
-      
+        

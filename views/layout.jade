@@ -1,23 +1,24 @@
-!!! 5
+doctype html
+
 html
   head
     - if (typeof(title) == 'undefined')
-        title Express Starter Template
+        title Smoothware
     - else 
         title= title
     
     // include default stylesheets and any view stylesheets
-    link(rel='stylesheet', href=base + '/stylesheets/style.css')
+    link(rel='stylesheet', href= '/stylesheets/style.css')
     
     // include default scripts and any view scripts
-    script(src=base + '/javascripts/jquery-1.7.min.js')
+    script(src='/javascripts/jquery-1.7.min.js')
     
   body   
     header
       div(class='content-wrapper')
         div(class="float-left")
           p(class="site-title")
-            a(href="/") your logo here.
+              a(href="http://smoothware.ie", class="smoothware-200-50-noback")  
         div(class="float-right")
           section#login
             ul
@@ -40,17 +41,19 @@ html
               li 
                 a(href="/") Home
               li 
-                a(href="/chat") Chat
+                a(href="/chat") Support
               li
                 a(href="/about") About
-    #body!= body
-      
+   
+
+    block content
+              
     footer
       div(class="content-wrapper")
         div(class="float-left")
-          p &copy; !{(new Date()).getFullYear()}
+          p neil_hosey@smoothware.ie &copy; !{(new Date()).getFullYear()}
         div(class="float-right")
           ul#social
             li
-              a(href="http://facebook.com", class="facebook") Facebook
-              a(href="http://twitter.com", class="twitter") Twitter
+              a(href="https://twitter.com/neil_smoothware", class="twitter") Twitter
+              

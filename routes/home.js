@@ -2,7 +2,7 @@ module.exports = function(app) {
 
     // home page
     app.get('/', function(req, res) {        
-        res.render('index', { title: 'Home Page.  ' })
+        res.render('index', { title: 'Smoothware Limited ' })
     });
 
     // chat area
@@ -12,6 +12,6 @@ module.exports = function(app) {
 
     // about page
     app.get('/about', function(req, res) {
-        res.render('about', { title: 'About Me.  ' })
+        res.render('about', { title: 'About Neil.  ' })
     });    
 }
